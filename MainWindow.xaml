@@ -1,0 +1,58 @@
+﻿<Window x:Class="CrudOperations.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CrudOperations"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="PanelName" TargetType="TextBlock">
+            <Setter Property="TextAlignment"  Value="Center"/>
+            <Setter Property="Margin"  Value="15"/>
+            <Setter Property="FontSize"  Value="16"/>
+            <Setter Property="FontWeight"  Value="Bold"/>
+        </Style>
+        <Style x:Key="MenuButton" TargetType="TextBlock">
+            <Setter Property="Margin"  Value="5,10"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Stretch">
+            <TextBlock Style="{StaticResource PanelName}">Меню</TextBlock>
+            <Button x:Name="AddingBtn">Добавить</Button>
+            <Button x:Name="UpdateBtn">Изменить</Button>
+            <Button x:Name="DeleteBtn">Удалить</Button>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Stretch" Grid.Row="1">
+            <TextBlock Style="{StaticResource PanelName}">Товар</TextBlock>
+            <DockPanel HorizontalAlignment="Stretch" Margin="0 8">
+                <TextBlock Margin="3 0">Наименование</TextBlock>
+                <TextBox></TextBox>
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Stretch"  Margin="0 8">
+                <TextBlock Margin="3 0">Цена</TextBlock>
+                <TextBox></TextBox>
+            </DockPanel>
+        </StackPanel>
+        <DataGrid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn>
+                    
+                </DataGridTextColumn>
+
+                <DataGridTextColumn>
+
+                </DataGridTextColumn>
+            </DataGrid.Columns>  
+        </DataGrid>
+    </Grid>
+</Window>

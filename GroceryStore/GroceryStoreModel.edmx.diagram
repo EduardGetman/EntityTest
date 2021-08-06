@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="613b85534d8b45df8a9b80d703dc3082" Name="Diagram1" >
+        <EntityTypeShape EntityType="GroceryStoreModel.Product" Width="1.5" PointX="9.125" PointY="2.25" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Storege" Width="1.5" PointX="7.125" PointY="2.375" />
+        <EntityTypeShape EntityType="GroceryStoreModel.Warehouse" Width="1.5" PointX="4.875" PointY="2.125" />
+        <AssociationConnector Association="GroceryStoreModel.WarehouseStorege" />
+        <AssociationConnector Association="GroceryStoreModel.ProductStorege" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

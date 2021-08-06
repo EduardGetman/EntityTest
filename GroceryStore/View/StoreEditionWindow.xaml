@@ -1,0 +1,36 @@
+﻿<Window x:Class="GroceryStore.View.StoreEditionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GroceryStore.View"
+        mc:Ignorable="d"
+        Title="StoreEditionWindow" Height="250" Width="250">
+    <Window.Resources>
+        <Style x:Key="PanelName" TargetType="TextBlock">
+            <Setter Property="TextAlignment"  Value="Center"/>
+            <Setter Property="Margin"  Value="8"/>
+            <Setter Property="FontSize"  Value="16"/>
+            <Setter Property="FontWeight"  Value="Bold"/>
+        </Style>
+        <Style TargetType="DockPanel">
+            <Setter Property="Margin" Value="5 10" />
+        </Style>
+    </Window.Resources>
+    <StackPanel Grid.Row="1">
+        <TextBlock Style="{StaticResource PanelName}">Хранение</TextBlock>
+        <DockPanel>
+            <TextBlock Margin="5 0" Text="Товар: "/>
+            <ComboBox x:Name="ProductComboBox"/>
+        </DockPanel>
+        <DockPanel>
+            <TextBlock Margin="5 0" Text="Склад: "/>
+            <ComboBox x:Name="WarehouseComboBox"/>
+        </DockPanel>
+        <DockPanel>
+            <TextBlock Margin="5 0" Text="Количество: "/>
+            <TextBox x:Name="CountTextBox"/>
+        </DockPanel>
+        <Button Margin="10" x:Name="EditButton" Content="Добавить" Click="EditButton_Click"/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GroceryStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="GroceryStoreModelStoreContainer">
+    <EntitySet Name="ProductSet" EntityType="GroceryStoreModel.Store.ProductSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StoregeSet" EntityType="GroceryStoreModel.Store.StoregeSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WarehouseSet" EntityType="GroceryStoreModel.Store.WarehouseSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="WarehouseStorege" Association="GroceryStoreModel.Store.WarehouseStorege">
+      <End Role="Warehouse" EntitySet="WarehouseSet" />
+      <End Role="Storege" EntitySet="StoregeSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProductStorege" Association="GroceryStoreModel.Store.ProductStorege">
+      <End Role="Product" EntitySet="ProductSet" />
+      <End Role="Storege" EntitySet="StoregeSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProductSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StoregeSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="Warehouse_Id" Type="int" Nullable="false" />
+    <Property Name="Product_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WarehouseSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="WarehouseStorege">
+    <End Role="Warehouse" Type="GroceryStoreModel.Store.WarehouseSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Storege" Type="GroceryStoreModel.Store.StoregeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Warehouse">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Storege">
+        <PropertyRef Name="Warehouse_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductStorege">
+    <End Role="Product" Type="GroceryStoreModel.Store.ProductSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Storege" Type="GroceryStoreModel.Store.StoregeSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Storege">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="GroceryStoreModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="GroceryStoreModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ProductSet" EntityType="GroceryStoreModel.Product" />
+          <EntitySet Name="StoregeSet" EntityType="GroceryStoreModel.Storege" />
+          <EntitySet Name="WarehouseSet" EntityType="GroceryStoreModel.Warehouse" />
+          <AssociationSet Name="WarehouseStorege" Association="GroceryStoreModel.WarehouseStorege">
+            <End Role="Warehouse" EntitySet="WarehouseSet" />
+            <End Role="Storege" EntitySet="StoregeSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProductStorege" Association="GroceryStoreModel.ProductStorege">
+            <End Role="Product" EntitySet="ProductSet" />
+            <End Role="Storege" EntitySet="StoregeSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Storege" Relationship="GroceryStoreModel.ProductStorege" FromRole="Product" ToRole="Storege" />
+        </EntityType>
+        <EntityType Name="Storege">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Count" Type="Int32" Nullable="false" DefaultValue="0" />
+          <NavigationProperty Name="Warehouse" Relationship="GroceryStoreModel.WarehouseStorege" FromRole="Storege" ToRole="Warehouse" />
+          <NavigationProperty Name="Product" Relationship="GroceryStoreModel.ProductStorege" FromRole="Storege" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <NavigationProperty Name="Storege" Relationship="GroceryStoreModel.WarehouseStorege" FromRole="Warehouse" ToRole="Storege" />
+        </EntityType>
+        <Association Name="WarehouseStorege">
+          <End Type="GroceryStoreModel.Warehouse" Role="Warehouse" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GroceryStoreModel.Storege" Role="Storege" Multiplicity="*" />
+        </Association>
+        <Association Name="ProductStorege">
+          <End Type="GroceryStoreModel.Product" Role="Product" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GroceryStoreModel.Storege" Role="Storege" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GroceryStoreModelStoreContainer" CdmEntityContainer="GroceryStoreModelContainer">
+    <EntitySetMapping Name="ProductSet">
+      <EntityTypeMapping TypeName="IsTypeOf(GroceryStoreModel.Product)">
+        <MappingFragment StoreEntitySet="ProductSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoregeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(GroceryStoreModel.Storege)">
+        <MappingFragment StoreEntitySet="StoregeSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WarehouseSet">
+      <EntityTypeMapping TypeName="IsTypeOf(GroceryStoreModel.Warehouse)">
+        <MappingFragment StoreEntitySet="WarehouseSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="WarehouseStorege" TypeName="GroceryStoreModel.WarehouseStorege" StoreEntitySet="StoregeSet">
+      <EndProperty Name="Warehouse">
+        <ScalarProperty Name="Id" ColumnName="Warehouse_Id" />
+      </EndProperty>
+      <EndProperty Name="Storege">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProductStorege" TypeName="GroceryStoreModel.ProductStorege" StoreEntitySet="StoregeSet">
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Id" ColumnName="Product_Id" />
+      </EndProperty>
+      <EndProperty Name="Storege">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
